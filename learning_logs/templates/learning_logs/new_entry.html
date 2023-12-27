@@ -1,0 +1,11 @@
+
+{% extends "learning_logs/base.html" %}
+{% block content %}
+  <p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p> <!--выводится тема, чтобы пользователь мог видеть, в какую тему добавляется новая запись. Тема также служит ссылкой на главную страницу этой темы.-->
+  <p>Add a new entry:</p>
+  <form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'> <!--Аргумент action формы включает значение topic_id из URL, чтобы функция пред- ставления могла связать новую запись с правильной темой-->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name='submit'>add entry</button>
+  </form>
+{% endblock content %}

@@ -1,0 +1,107 @@
+
+{% load bootstrap4 %} <!--загружается коллекция шаблонных тегов из django-bootstrap4.-->
+
+<!DOCTYPE html> <!--Затем файл объявляется как документ HTML-->
+<html lang="en"> <!--написанный на английском языке-->
+ <head> <!--Файл HTML состоит из двух основных частей, заголовка и тела; заголовок файла начинается здесь-->
+  <!--Заголовок файла HTML не содержит контента: он всего лишь передает браузеру информацию, необходимую для правильного отображения страницы.-->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1,
+     shrink-to-fit=no">
+   <title>Learning Log</title>
+   {% bootstrap_css %}
+   <!--используется один из шаблонных тегов django-bootstrap4, который приказывает Django включить все стилевые файлы Bootstrap. Следующий тег активизирует все интерактивное поведение, которое может использоваться на странице, например раздвижные навигационные панели-->
+   {% bootstrap_javascript jquery='full' %}
+</head>
+<body> <!--открывающий тег <body> . Тело файла HTML содержит кон- тент, который будет виден пользователям на странице.-->
+  <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+    <!--элемент <nav> обозначает раздел навигационных ссылок на странице. Весь контент внутри этого элемента 
+      оформляется по правилам Bootstrap, определяемым селекторами navbar, navbar-expand-md и другим перечисленным 
+      здесь. Селектор определяет, к каким элементам страницы должно применяться стилевое правило. 
+      Селекторы navbar- light и bg-light оформляют навигационную панель темой со светлым фоном. Сокращение mb 
+      в mb-4 происходит от «margin-bottom», то есть «нижнее поле»; этот селектор гарантирует, что между 
+      навигационной панелью и остальным контентом страницы остается свободное место. Селектор border создает тонкую 
+      рамку вокруг светлого фона, чтобы немного отделить его от остального контента страницы.-->
+
+    <a class="navbar-brand" href="{% url 'learning_logs:index'%}">
+        Learning Log</a>
+    <!--задается имя проекта, которое выводится у левого края навигационной панели, и создается ссылка на домашнюю 
+      страницу; она будет отображаться на каждой странице проекта. Селектор navbar-brand оформляет эту ссылку так, 
+      чтобы она выделялась на фоне остальных ссылок; это оформление становится одной из составляющих фирменной символики сайта.-->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarCollapse" aria-controls="navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span></button>
+      <!--шаблон определяет кнопку, которая будет отображаться, если ширины окна браузера не хватает для 
+        горизонтального отображения всей навигационной панели. Когда пользователь нажимает кнопку, навигационные 
+        элементы выводятся в раскрывающемся списке. Атрибут collapse сворачивает навигационную панель при 
+        уменьшении размеров окна браузера и при отображении сайта на мобильных устройствах с малыми экранами.-->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'learning_logs:topics'%}">
+                  Topics</a></li>
+          </ul>
+          <ul class="navbar-nav ml-auto"> <!--ml-auto означает «margin- left-automatic», то есть «автоматическое левое поле»; этот селектор анализирует другие элементы на навигационной панели и определяет величину левого поля, которое сдвигает эту группу ссылок к правому краю экрана.-->
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <span class="navbar-text">Hello, {{ user.username }}.</span>
+          </li>
+
+          <form style= class="nav-item" method="post" action="{% url 'users:logout' %}">
+            {% csrf_token %}
+            <button class="nav-link" type="submit">Log out</button>
+          </form>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:login' %}">Log in</a></li>
+        {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <main role="main" class="container"> <!--Элемент main используется для основного контента в теле страницы. В данном случае назначается селектор container, что является простым способом группировки элементов на странице. В этот контейнер будут включены два элемента div.-->
+      <div class="pb-2 mb-2 border-bottom">
+        <!--содержит блок page_header. Мы будем использовать этот блок для отображения заголовка большинства 
+          страниц. Чтобы секция выделялась на фоне других частей страницы, мы разместим отступы под заголовком. 
+          Отступ (padding) представляет собой пространство между контентом элемента и его границей. 
+          Селектор pb-2 — директива Bootstrap, создающая отступы умеренной величины в нижней части оформляемого 
+          элемента. Полем (margin) называется пространство между границей элемента и другими элементами страницы. 
+          В нашем приложении граница нужна только в нижней части страницы, поэтому мы используем селектор 
+          border-bottom, создающий тонкую границу в нижней части блока page_header.-->
+        {% block page_header %}{% endblock page_header %}
+      </div>
+      <div>
+        {% block content %}{% endblock content %}
+      </div>
+    </main>
+  </body>
+</html>
+
+
+
+
+<!--old base.html-->
+
+{#<p>#}
+    {#<a href="{% url 'learning_logs:index' %}">Learning Log</a> -#}
+    <!--Learning Log</a> шаблонный тег {% url 'learning_logs:index' %} гене- рирует URL-адрес, соответствующий схеме URL, определенной в файле learning_ logs/urls .py с именем 'index'-->
+    <!--В данном примере learning_logs — пространство имен, а index — схема URL с уникальным именем в этом пространстве имен
+     Пространство имен определяется значением, присвоенным app_name в файлеlearning_logs/urls .py.-->
+    {#<a href="{% url 'learning_logs:topics' %}">Topics</a>#}
+    {#{% if user.is_authenticated %} <!--В системе аутентификации Django в каждом шаблоне доступна переменная user, которая всегда имеет атрибут is_authenticated: атрибут равен True, если пользователь прошел проверку, и False в противном случае. Это позволяет вам выводить разные сообщения для проверенных и непроверенных пользователей.-->#}
+      {#Hello, {{user.username}}.#}
+      {#<form method='post' action="{% url 'users:logout' %}"><!--https://stackoverflow.com/questions/77690729/django-built-in-logout-view-method-not-allowed-get-users-logout-->#}
+        {#{% csrf_token %}#}
+        {#<button type="submit">logout</button>#}
+      {#</form>#} 
+    {#{% else %}#}
+      {#<a href="{% url 'users:register' %}">Register</a> -#}
+      {#<a href="{% url 'users:login' %}">log in</a>#}
+    {#{% endif %}#}
+{#</p>#}
+{#{% block content %}{% endblock content %}<!-- Блок с именем content резервирует место; информация, попадающая в блок content, будет определяться дочерним шаблоном.-->#}
+

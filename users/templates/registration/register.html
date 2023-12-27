@@ -1,0 +1,13 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+  <form method="post" action="{% url 'users:register' %}">
+    {% csrf_token %}
+    {{ form.as_p }} <!--используем метод as_p, чтобы инфраструктура Django могла правильно отобразить все поля формы, включая все сообщения об ошибках, если форма была заполнена неправильно.-->
+
+    <button name="submit">register</button>
+    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
+  </form>
+  
+{% endblock content %}

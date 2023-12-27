@@ -1,0 +1,54 @@
+
+{% extends 'learning_logs/base.html'%}
+
+{% block page_header %}
+  <h3>{{ topic }}</h3>
+{% endblock page_header %}
+
+{% block content %}
+<p>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry</a>
+</p>
+
+    {% for entry in entries %}
+    <div class="card mb-3"> {#элемент с селектором card. Он имеет два вложенных элемента: первый предназначен для хранения временной метки и ссылки для редактирования, а второй — для хранения тела записи.#}
+        <h4 class="card-header">
+          {{ entry.date_added|date:'M d, Y H:i' }}
+          <small><a href="{% url 'learning_logs:edit_entry' entry.id %}">
+              edit entry</a></small>
+        </h4>
+        <div class="card-body">
+          {{ entry.text|linebreaks }}
+        </div>
+      </div>
+    {% empty %} <!--{ empty } используется для вывода сообщения об отсутствии записей.-->
+    <p>There are no entries for this project yet.</p>
+    {%endfor%}
+
+{%endblock content%}
+
+
+<!--old topic.html-->
+{#{% extends 'learning_logs/base.html'%}#}
+
+{#{% block content %}#}
+<!--выводится текущая тема из шаблонной переменной {{ topic }}. Переменная topic доступна, потому что она включена в словарь context-->
+{#<p>Topic: {{ topic }}</p>#} 
+{#<p>Entries: </p>#}
+{#<p>#}
+    {#<a href="{% url 'learning_logs:new_entry' topic.id %}">add new entry</a>#}
+{#</p>#}
+{#<ul>#}
+    {#{% for entry in entries %}#}
+    {#<li>#}
+        {#<p>{{ entry.date_added|date:'M d, Y H:i'}}</p> <!--В шаблонах Django вертикальная черта (|) представляет фильтр — функцию, изменяющую значение шаблонной переменной. Фильтр date:'M d, Y H:i' выводит временные метки в формате January 1, 2018 23:00. -->#}
+        {#<p>{{ entry.text|linebreaks}}</p><!-- linebreaks следит за тем, чтобы длинный текст содержал разрывы строк в формате, поддерживаемом браузером (вместо блока непрерывного текста).-->#}
+        {#<p>#}
+            {#<a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a>#}
+        {#</p>#}
+    {#</li>#}
+    {#{% empty %} <!--{ empty } используется для вывода сообщения об отсутствии записей.-->#}
+    {#<li>There are no entries for this project yet.</li>#}
+    {#{%endfor%}#}
+{#</ul>#}
+{#{%endblock content%}#}

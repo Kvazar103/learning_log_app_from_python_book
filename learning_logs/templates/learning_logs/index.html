@@ -1,0 +1,29 @@
+{% extends "learning_logs/base.html" %}
+
+{% block page_header %} {#мы сообщаем Django о том, что далее следует определение содержимого блока page_header.#}
+<div class='jumbotron'> {#Селектор jumbotron применяет эту группу стилевых директив из библиотеки Bootstrap к элементу.#}
+    {#джамботронома — большого блока, который выдается на общем фоне страницы и может содержать любую информацию на ваше усмотрение. Обычно этот элемент используется на домашних страницах для размещениякраткого описания проекта.#}
+    <h1 class="display-3">Track your learning.</h1> {#с селектором display-3 заголовок становится более тонким и высоким#}
+    <p class="lead">Make your own Learning Log, and keep a list of the
+        topics you're learning about. Whenever you learn something new
+        about a topic, make an entry summarizing what you've learned.</p>
+    <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}"
+        role="button">Register &raquo;</a> {#Код &raquo; является сущностью HTML, представляющей две правые угло- вые скобки (>>).#}
+  </div>
+{% endblock page_header %} {#блок page_header закрывается. Контент на эту страницу добавляться не будет, поэтому определять блок content на этой странице не нужно.#}
+
+
+<!--old index.html-->
+{#{% extends "learning_logs/base.html" %}#}
+
+{#{% block content %}#}
+{#<p>Learning Log helps you keep track of your learning, for any topic you're#}
+{#learning about.</p>#}
+{#{% endblock content %}#}
+
+<!--вставкой тега block с именем content. Все, что не наследуется от родительского шаблона, попадает 
+    в блок content. В данном случае это абзац с описанием проекта Learning Log.  мы сообщаем о том, 
+    что определение content завершено, при помощи тега endblock content. Наличие имени у endblock 
+    не обязательно, но если шаблон увеличится и станет вклю- чать несколько блоков, будет полезно сразу видеть, 
+    какой именно блок завершается.-->
+    
