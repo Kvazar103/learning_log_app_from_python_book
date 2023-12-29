@@ -96,9 +96,9 @@ WSGI_APPLICATION = 'learning_log.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql_psycopg2',
-        'NAME':'iExam',
-        'USER':'adm',
-        'PASSWORD':'password',
+        'NAME':'learning_log',
+        'USER':'nazarvoynarovich',
+        'PASSWORD':'',
         'HOST':'localhost',
         'PORT':'',
     }
