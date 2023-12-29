@@ -34,7 +34,9 @@ DEBUG = True
 #Это один из способов хранения конфиденциальной информации на сервере, прикотором она отделяется от остального кода проекта.
 #Изменим файл settings.py, чтобы он проверял переменную среды при запуске проекта на Heroku
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ddah.herokuapp.com']
+
 
 
 # Application definition
@@ -96,17 +98,26 @@ WSGI_APPLICATION = 'learning_log.wsgi.application'
 #}
 #HEROKU не підтримує sqlite3, тому treba postgresql
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE':'django.db.backends.postgresql_psycopg2',
+#        'NAME':'learning_log',
+#        'USER':'postgres',
+#        'PASSWORD':'123456789',
+#        'PORT':'5432',
+#        'HOST':'localhost',
+#    }
+#}
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql_psycopg2',
-        'NAME':'learning_log',
-        'USER':'postgres',
-        'PASSWORD':'123456789',
+        'NAME':'dd7nmav97vl4on',
+        'USER':'qpwaucesesalls',
+        'PASSWORD':'307a654f602622078034e5398170a4cb0717cdb51c948e87895200a2a460cb69',
         'PORT':'5432',
-        'HOST':'localhost',
+        'HOST':'ec2-3-217-146-37.compute-1.amazonaws.com',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
