@@ -93,6 +93,18 @@ WSGI_APPLICATION = 'learning_log.wsgi.application'
 #}
 #HEROKU не підтримує sqlite3, тому treba postgresql
 
+DATABASES = {
+    'default': {
+        'ENGINE':'django.db.backends.postgresql_psycopg2',
+        'NAME':'iExam',
+        'USER':'adm',
+        'PASSWORD':'password',
+        'HOST':'localhost',
+        'PORT':'',
+    }
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
