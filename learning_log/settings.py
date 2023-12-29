@@ -97,10 +97,10 @@ DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql_psycopg2',
         'NAME':'learning_log',
-        'USER':'nazarvoynarovich',
+        'USER':'postgres',
         'PASSWORD':'',
         'HOST':'localhost',
-        'PORT':'',
+        'PORT':'5432',
     }
 }
 
