@@ -98,9 +98,9 @@ DATABASES = {
         'ENGINE':'django.db.backends.postgresql_psycopg2',
         'NAME':'learning_log',
         'USER':'postgres',
-        'PASSWORD':'',
-        'HOST':'localhost',
+        'PASSWORD':'123456789',
         'PORT':'5432',
+        'HOST':'localhost',
     }
 }
 
